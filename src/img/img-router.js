@@ -21,3 +21,5 @@ imgRouter
   .get((req, res) => {
     res.json(res.img);
   });
+
+module.exports = imgRouter;

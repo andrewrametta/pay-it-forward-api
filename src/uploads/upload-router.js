@@ -21,3 +21,5 @@ uploadRouter.route("/").post(
       .catch(next);
   }
 );
+
+module.exports = uploadRouter;

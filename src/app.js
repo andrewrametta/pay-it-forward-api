@@ -5,6 +5,8 @@ const cors = require("cors");
 const helmet = require("helmet");
 const { NODE_ENV } = require("./config");
 const fileUpload = require("express-fileupload");
+const uploadRouter = require("./uploads/upload-router");
+const imgRouter = require("./img/img-services");
 
 const app = express();
 
@@ -20,6 +22,9 @@ app.use(cors());
 */
 app.use(helmet());
 app.use(fileUpload());
+
+app.use("/uploads", uploadRouter);
+app.use("/img", imgRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

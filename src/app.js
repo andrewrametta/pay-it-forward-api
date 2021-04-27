@@ -23,8 +23,8 @@ app.use(cors());
 app.use(helmet());
 app.use(fileUpload());
 
-app.use("/uploads", uploadRouter);
-app.use("/img", imgRouter);
+app.use("/api/uploads", uploadRouter);
+app.use("/api/img", imgRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello World");

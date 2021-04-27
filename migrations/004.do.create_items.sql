@@ -16,4 +16,4 @@ CREATE TABLE items (
     title TEXT,
     description TEXT,
     photo 
-)
+);

@@ -15,5 +15,6 @@ CREATE TABLE items (
     cur_status status,
     title TEXT,
     description TEXT,
-    photo 
+    img_id INTEGER
+        REFERENCES imgs(id) ON DELETE CASCADE NOT NULL
 );

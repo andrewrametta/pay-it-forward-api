@@ -1,25 +1,18 @@
-const express = requier("express");
+const express = require("express");
+const imgRouter = express.Router();
 const ImgService = require("./img-services");
 
-const imgRouter = express.Router();
-
-imgRouter
-  .route("/:img_id")
-  .all((req, res, next) => {
-    const { img_id } = req.params;
-    ImgService.getImgById(req.app.get("db"), img_id)
-      .then((img) => {
-        if (!img) {
-          return res.status(404).json({
-            error: { message: "Img Not Found" },
-          });
-        }
-        res.img = img;
-      })
-      .catch(next);
-  })
-  .get((req, res) => {
-    res.json(res.img);
-  });
-
+imgRouter.route("/:id").get((req, res, next) => {
+  const id = req.params.id;
+  ImgService.getImgById(req.app.get("db"), id)
+    .then((img) => {
+      if (!img) {
+        return res.status(404).json({
+          error: { message: "Img Not Found" },
+        });
+      }
+      res.end(img.img);
+    })
+    .catch(next);
+});
 module.exports = imgRouter;

@@ -1,6 +1,6 @@
 const ImgService = {
   getImgById(knex, id) {
-    return knex.from("img").where("id", id).first();
+    return knex.from("img").where({ id: id }).first();
   },
 };
 

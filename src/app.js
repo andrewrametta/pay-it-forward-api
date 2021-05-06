@@ -6,7 +6,6 @@ const helmet = require("helmet");
 const { NODE_ENV } = require("./config");
 const fileUpload = require("express-fileupload");
 const uploadRouter = require("./uploads/upload-router");
-const imgRouter = require("./img/img-router");
 
 const app = express();
 
@@ -25,7 +24,6 @@ app.use(helmet());
 app.use(fileUpload());
 
 app.use("/api/uploads", uploadRouter);
-app.use("/api/img", imgRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

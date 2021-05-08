@@ -7,8 +7,8 @@ CREATE TYPE typeof as ENUM(
     'org'
 );
 
-DROP TYPE IF EXISTS ustatus;
-CREATE TYPE ustatus as ENUM(
+DROP TYPE IF EXISTS usestatus;
+CREATE TYPE usestatus as ENUM(
     'review',
     'active',
     'inactive',
@@ -27,6 +27,6 @@ CREATE TABLE users (
     city VARCHAR(100) NOT NULL,
     state VARCHAR(2) NOT NULL,
     zip VARCHAR(10) NOT NULL,
-    user_url: VARCHAR(200) NOT NULL,
-    user_status ustatus
+    user_url VARCHAR(200),
+    user_status usestatus
 );

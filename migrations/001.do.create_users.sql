@@ -7,6 +7,15 @@ CREATE TYPE typeof as ENUM(
     'org'
 );
 
+DROP TYPE IF EXISTS ustatus;
+CREATE TYPE ustatus as ENUM(
+    'review',
+    'active',
+    'inactive',
+    'delete',
+    'banned'
+);
+
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     email VARCHAR(100) NOT NULL,
@@ -18,5 +27,6 @@ CREATE TABLE users (
     city VARCHAR(100) NOT NULL,
     state VARCHAR(2) NOT NULL,
     zip VARCHAR(10) NOT NULL,
-    user_url: VARCHAR(200) NOT NULL
+    user_url: VARCHAR(200) NOT NULL,
+    user_status ustatus
 );

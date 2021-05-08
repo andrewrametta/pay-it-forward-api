@@ -12,11 +12,11 @@ const serializeUser = (user) => {
     password: xss(user.password),
     dat_created: user.dat_created,
     user_type: user.user_type,
-    address: user.address,
-    city: user.city,
-    state: user.state,
-    zip: user.zip,
-    user_url: user.user_url,
+    address: xss(user.address),
+    city: xss(user.city),
+    state: xss(user.state),
+    zip: xss(user.zip),
+    user_url: xss(user.user_url),
   };
 };
 
@@ -30,9 +30,28 @@ usersRouter
     res.json(serializeUser(req.user));
   })
   .post((req, res) => {
-    const { username, password } = req.body;
+    const {
+      username,
+      password,
+      email,
+      user_type,
+      address,
+      city,
+      state,
+      zip,
+      user_url,
+    } = req.body;
     const REGEX_UPPER_LOWER_NUMBER_SPECIAL = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&])[\S]+/;
-    for (const field of ["username", "password"]) {
+    for (const field of [
+      "username",
+      "password",
+      "email",
+      "user_type",
+      "address",
+      "city",
+      "state",
+      "zip",
+    ]) {
       if (!req.body[field]) {
         return res.status(400).json({
           error: `Missing ${field}`,
@@ -62,6 +81,13 @@ usersRouter
         const newUser = {
           username,
           password: hashedPassword,
+          email,
+          user_type,
+          address,
+          city,
+          state,
+          zip,
+          user_url,
         };
 
         return UsersService.insertUser(knexInstance, newUser).then((user) => {

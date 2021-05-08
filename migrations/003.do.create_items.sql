@@ -3,18 +3,18 @@ DROP TABLE IF EXISTS items;
 DROP TYPE IF EXISTS status;
 CREATE TYPE status as ENUM(
     'available',
-    'claimed'
+    'claimed',
+    'deleted'
 );
 
 CREATE TABLE items (
     id SERIAL PRIMARY KEY,
     user_id INTEGER
-        REFERENCES users(id) ON DELETE CASCADE NOT NULL,
+        REFERENCES users(id),
     org_id INTEGER
-        REFERENCES organizations(id) ON DELETE CASCADE NOT NULL,
+        REFERENCES organizations(id),
     cur_status status,
     title TEXT,
     description TEXT,
-    img_id INTEGER
-        REFERENCES imgs(id) ON DELETE CASCADE NOT NULL
+    item_url VARCHAR(200) NOT NULL
 );

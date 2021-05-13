@@ -7,6 +7,7 @@ const { NODE_ENV } = require("./config");
 const uploadRouter = require("./uploads/upload-router");
 const usersRouter = require("./users/users-router");
 const authRouter = require("./auth/auth-router");
+const itemsRouter = require("./items/items-router");
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cors());
 */
 app.use(helmet());
 
+app.use("/api/items", itemsRouter);
 app.use("/api/uploads", uploadRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);

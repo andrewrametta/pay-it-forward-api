@@ -5,6 +5,7 @@ CREATE TABLE organizations (
     user_id INTEGER
         REFERENCES users(id) ON DELETE CASCADE NOT NULL,
     name TEXT,
-    description TEXT
+    description TEXT,
+    org_img_url VARCHAR(200) NOT NULL
 );
 

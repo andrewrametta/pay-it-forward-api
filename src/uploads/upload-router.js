@@ -7,6 +7,7 @@ uploadRouter.post("/", async (req, res) => {
     const fileString = req.body.data;
     const uploadResponse = await cloudinary.uploader.upload(fileString, {
       upload_preset: "payitforward",
+      timeout: 100000,
     });
     console.log(uploadResponse);
     console.log(uploadResponse.url);

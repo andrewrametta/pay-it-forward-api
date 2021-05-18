@@ -8,6 +8,7 @@ const uploadRouter = require("./uploads/upload-router");
 const usersRouter = require("./users/users-router");
 const authRouter = require("./auth/auth-router");
 const itemsRouter = require("./items/items-router");
+const socket = require("socket.io");
 
 const app = express();
 

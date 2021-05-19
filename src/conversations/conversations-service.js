@@ -1,6 +1,6 @@
 const ConversationsService = {
   getAll(knex) {
-    return knex.select("*").from("items");
+    return knex.select("*").from("conversations");
   },
   insertConversation(knex, newConversation) {
     return knex
@@ -11,12 +11,13 @@ const ConversationsService = {
         return rows[0];
       });
   },
-  getConversationById(knex, userId, orgId) {
+  getConversationsById(knex, user_id) {
     return knex
       .from("conversations")
       .select("*")
-      .where("user_id", orgId)
-      .where("user2_id", userId)
+      .where(function () {
+        this.where("user_id", user_id).orWhere("user2_id", user_id);
+      })
       .first();
   },
 };

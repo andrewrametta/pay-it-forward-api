@@ -15,9 +15,15 @@ conversationsRouter
   .route("/")
   .get(requireAuth, (req, res, next) => {
     const user_id = req.user.id;
-    ConversationsService.getConversationsById(req.app.get("db"), user_id)
-      .then((conversations) => {
-        res.json(conversations.map(serializeConversation));
+
+    const user2_id = req.user.id;
+    ConversationsService.getConversationsById(
+      req.app.get("db"),
+      user_id,
+      user2_id
+    )
+      .then((conversation) => {
+        res.json(conversation.map(serializeConversation));
       })
       .catch(next);
   })

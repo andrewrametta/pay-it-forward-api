@@ -11,7 +11,7 @@ const ItemsService = {
         return rows[0];
       });
   },
-  getById(knex, id) {
+  getItemsById(knex, id) {
     return knex.from("items").select("*").where("id", id).first();
   },
 };

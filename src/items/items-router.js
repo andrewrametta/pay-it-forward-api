@@ -45,7 +45,7 @@ itemsRouter
   .route("/:item_id")
   .all((req, res, next) => {
     const { item_id } = req.params;
-    ItemsService.getById(req.app.get("db"), item_id)
+    ItemsService.getItemsById(req.app.get("db"), item_id)
       .then((item) => {
         if (!item) {
           return res.status(404).json({ error: { message: "Note Not Found" } });

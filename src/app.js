@@ -8,7 +8,8 @@ const uploadRouter = require("./uploads/upload-router");
 const usersRouter = require("./users/users-router");
 const authRouter = require("./auth/auth-router");
 const itemsRouter = require("./items/items-router");
-const socket = require("socket.io");
+const conversationsRouter = require("./conversations/conversations-router");
+const messagesRouter = require("./messages/messages-router");
 
 const app = express();
 
@@ -29,6 +30,8 @@ app.use("/api/items", itemsRouter);
 app.use("/api/uploads", uploadRouter);
 app.use("/api/users", usersRouter);
 app.use("/api/auth", authRouter);
+app.use("/api/conversations", conversationsRouter);
+app.use("/api/messages", messagesRouter);
 
 app.use(function errorHandler(error, req, res, next) {
   let response;

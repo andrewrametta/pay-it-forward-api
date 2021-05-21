@@ -14,7 +14,13 @@ const ConversationsService = {
   getConversationsById(knex, user_id) {
     return knex
       .from("conversations")
-      .select("*")
+      .select(
+        knex.raw(
+          "conversations.*, users.username, users2.username as username2"
+        )
+      )
+      .join("users", { "users.id": "conversations.user_id" })
+      .join("users as users2", { "users2.id": "conversations.user2_id" })
       .where(function () {
         this.where("user_id", user_id).orWhere("user2_id", user_id);
       });

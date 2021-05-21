@@ -12,12 +12,19 @@ const serializeMessage = (message) => ({
   text: xss(message.text),
   timestamp: xss(message.timestamp),
   message_status: message.message_status,
+  username: message.username,
 });
 
 messagesRouter
   .route("/")
   .get((req, res, next) => {
-    MessagesService.getAllMessages(req.app.get("db"))
+    console.log(req.body);
+    const conversation_id = req.body.conversation_id;
+    MessagesService.getMessagesByConversationId(
+      req.app.get("db"),
+      conversation_id
+    )
+
       .then((messages) => {
         res.json(messages.map(serializeMessage));
       })
@@ -42,5 +49,19 @@ messagesRouter
       })
       .catch(next);
   });
+
+messagesRouter.route("/:conversation_id").get((req, res, next) => {
+  console.log(req.body);
+  const conversation_id = req.params.conversation_id;
+  MessagesService.getMessagesByConversationId(
+    req.app.get("db"),
+    conversation_id
+  )
+
+    .then((messages) => {
+      res.json(messages.map(serializeMessage));
+    })
+    .catch(next);
+});
 
 module.exports = messagesRouter;

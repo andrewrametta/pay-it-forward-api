@@ -10,11 +10,11 @@ CREATE TYPE status as ENUM(
 CREATE TABLE items (
     id SERIAL PRIMARY KEY,
     user_id INTEGER
-        REFERENCES users(id),
+        REFERENCES users(id)ON DELETE CASCADE NOT NULL,
     org_id INTEGER
-        REFERENCES organizations(id),
+        REFERENCES organizations(id)ON DELETE CASCADE NOT NULL,
     cur_status status,
     title TEXT,
     description TEXT,
-    item_url VARCHAR(200) NOT NULL
+    item_url VARCHAR(300) NOT NULL
 );

@@ -5,7 +5,5 @@ CREATE TABLE conversations (
     user_id INTEGER
         REFERENCES users(id),
     user2_id INTEGER
-        REFERENCES users(id),
-    item_id INTEGER
-        REFERENCES items(id)
+        REFERENCES users(id)
 );

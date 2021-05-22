@@ -10,7 +10,7 @@ CREATE TYPE readstatus as ENUM(
 CREATE TABLE messages (
     id SERIAL PRIMARY KEY,
     conversations_id INTEGER
-        REFERENCES conversations(id),
+        REFERENCES conversations(id) ON DELETE CASCADE NOT NULL,
     user_id INTEGER
         REFERENCES users(id),
     text TEXT,

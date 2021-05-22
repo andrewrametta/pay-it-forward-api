@@ -7,7 +7,7 @@ const messagesRouter = express.Router();
 
 const serializeMessage = (message) => ({
   id: message.id,
-  conversation_id: message.conversation_id,
+  conversations_id: message.conversations_id,
   user_id: message.user_id,
   text: xss(message.text),
   timestamp: xss(message.timestamp),
@@ -19,10 +19,10 @@ messagesRouter
   .route("/")
   .get((req, res, next) => {
     console.log(req.body);
-    const conversation_id = req.body.conversation_id;
+    const conversations_id = req.body.conversations_id;
     MessagesService.getMessagesByConversationId(
       req.app.get("db"),
-      conversation_id
+      conversations_id
     )
 
       .then((messages) => {
@@ -31,8 +31,12 @@ messagesRouter
       .catch(next);
   })
   .post(requireAuth, (req, res, next) => {
-    const { conversation_id, user_id, text, status } = req.body;
-    const newMessage = { conversation_id, user_id, text, status };
+    const { conversations_id, text, message_status } = req.body;
+    const newMessage = {
+      conversations_id,
+      text,
+      message_status,
+    };
 
     for (const [key, value] of Object.entries(newMessage))
       if (value == null)
@@ -44,18 +48,18 @@ messagesRouter
       .then((message) => {
         res
           .status(201)
-          .location(`/messages/${message.id}`)
+          //.location(`/messages/${message.id}`)
           .json(serializeMessage(message));
       })
       .catch(next);
   });
 
-messagesRouter.route("/:conversation_id").get((req, res, next) => {
+messagesRouter.route("/:conversations_id").get((req, res, next) => {
   console.log(req.body);
-  const conversation_id = req.params.conversation_id;
+  const conversations_id = req.params.conversations_id;
   MessagesService.getMessagesByConversationId(
     req.app.get("db"),
-    conversation_id
+    conversations_id
   )
 
     .then((messages) => {

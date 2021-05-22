@@ -14,6 +14,9 @@ const ItemsService = {
   getItemsById(knex, id) {
     return knex.from("items").select("*").where("id", id).first();
   },
+  deleteItem(knex, item_id) {
+    return knex("items").where("id", item_id).delete();
+  },
 };
 
 module.exports = ItemsService;

@@ -2,7 +2,7 @@ const MessagesService = {
   getAllMessages(knex) {
     return knex.select("*").from("messages");
   },
-  insertItem(knex, newMessage) {
+  insertMessage(knex, newMessage) {
     return knex
       .insert(newMessage)
       .into("messages")

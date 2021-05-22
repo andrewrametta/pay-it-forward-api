@@ -57,6 +57,11 @@ itemsRouter
   })
   .get((req, res) => {
     res.json(serializeItem(res.item));
+  })
+  .delete((req, res, next) => {
+    ItemsService.deleteItem(req.app.get("db"), req.params.item_id)
+      .then(() => res.status(204).end())
+      .catch(next);
   });
 
 module.exports = itemsRouter;

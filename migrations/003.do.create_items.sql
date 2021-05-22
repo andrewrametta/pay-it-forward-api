@@ -12,7 +12,7 @@ CREATE TABLE items (
     user_id INTEGER
         REFERENCES users(id)ON DELETE CASCADE NOT NULL,
     org_id INTEGER
-        REFERENCES organizations(id)ON DELETE CASCADE NOT NULL,
+        REFERENCES organizations(id)ON DELETE CASCADE,
     cur_status status,
     title TEXT,
     description TEXT,

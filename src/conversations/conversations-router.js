@@ -30,8 +30,8 @@ conversationsRouter
       .catch(next);
   })
   .post(requireAuth, (req, res, next) => {
-    const { user_id, user2_id, item_id } = req.body;
-    const newConversation = { user_id, user2_id, item_id };
+    const { user_id, user2_id } = req.body;
+    const newConversation = { user_id, user2_id };
 
     for (const [key, value] of Object.entries(newConversation))
       if (value == null)

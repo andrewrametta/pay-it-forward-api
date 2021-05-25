@@ -48,7 +48,7 @@ itemsRouter
     ItemsService.getItemsById(req.app.get("db"), item_id)
       .then((item) => {
         if (!item) {
-          return res.status(404).json({ error: { message: "Note Not Found" } });
+          return res.status(404).json({ error: { message: "Item Not Found" } });
         }
         res.item = item;
         next();

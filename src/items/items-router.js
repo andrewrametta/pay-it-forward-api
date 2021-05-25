@@ -59,8 +59,12 @@ itemsRouter
     res.json(serializeItem(res.item));
   })
   .delete((req, res, next) => {
+    console.log(req.params);
+    console.log(req.params.item_id);
     ItemsService.deleteItem(req.app.get("db"), req.params.item_id)
-      .then(() => res.status(204))
+      .then(() => {
+        res.status(204).end();
+      })
       .catch(next);
   });
 

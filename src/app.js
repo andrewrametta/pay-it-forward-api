@@ -10,6 +10,7 @@ const authRouter = require("./auth/auth-router");
 const itemsRouter = require("./items/items-router");
 const conversationsRouter = require("./conversations/conversations-router");
 const messagesRouter = require("./messages/messages-router");
+const { CLIENT_ORIGIN } = require("./config");
 
 const app = express();
 
@@ -17,12 +18,11 @@ const morganOption = NODE_ENV === "production" ? "tiny" : "common";
 
 app.use(express.json());
 app.use(morgan(morganOption));
-app.use(cors("*"));
-// app.use(
-//   cors({
-//     origin: CLIENT_ORIGIN,
-//   })
-// );
+app.use(
+  cors({
+    origin: CLIENT_ORIGIN,
+  })
+);
 
 app.use(helmet());
 

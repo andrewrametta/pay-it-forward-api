@@ -38,9 +38,20 @@ conversationsRouter
         return res.status(400).json({
           error: { message: `'${key}' is required` },
         });
-    // newConversation.user_id = req.user.id;
-    // newConversation.user2_id = req.user2_id;
-    ConversationsService.insertConversation(req.app.get("db"), newConversation)
+    ConversationsService.getConversationsById(req.app.get("db"), req.user.id)
+      .then((conversations) => {
+        const found = conversations.find(
+          (conversation) => conversation.user2_id === newConversation.user2_id
+        );
+        if (found) {
+          return found;
+        } else {
+          return ConversationsService.insertConversation(
+            req.app.get("db"),
+            newConversation
+          );
+        }
+      })
       .then((conversation) => {
         res
           .status(201)

@@ -13,6 +13,11 @@ const serializeItem = (item) => ({
   title: xss(item.title),
   description: xss(item.description),
   item_url: xss(item.item_url),
+  username: item.username,
+  address: item.address,
+  city: item.city,
+  state: item.state,
+  user_url: item.user_url,
 });
 
 itemsRouter

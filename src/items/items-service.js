@@ -1,6 +1,9 @@
 const ItemsService = {
   getAllItems(knex) {
-    return knex.select("*").from("items");
+    return knex
+      .select(knex.raw("items.*, users.*"))
+      .join("users", { "users.id": "items.user_id" })
+      .from("items");
   },
   insertItem(knex, newItem) {
     return knex

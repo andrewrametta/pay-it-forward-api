@@ -50,7 +50,7 @@ itemsRouter
   .route("/:item_id")
   .all((req, res, next) => {
     const { item_id } = req.params;
-    ItemsService.getItemsById(req.app.get("db"), item_id)
+    ItemsService.getItemById(req.app.get("db"), item_id)
       .then((item) => {
         if (!item) {
           return res.status(404).json({ error: { message: "Item Not Found" } });
@@ -69,6 +69,25 @@ itemsRouter
     ItemsService.deleteItem(req.app.get("db"), req.params.item_id)
       .then(() => {
         res.status(204).end();
+      })
+      .catch(next);
+  })
+  .patch((req, res, next) => {
+    const { title, description, cur_status } = req.body;
+    const itemToUpdate = { title, description, cur_status };
+    const numberOfValues = Object.values(itemToUpdate).filter(Boolean).length;
+    if (numberOfValues === 0) {
+      return res.status(400).json({
+        error: {
+          message: `Request body must contain either 'title', 'description', 'cur_status'`,
+        },
+      });
+    }
+    const id = req.params.item_id;
+    ItemsService.updateItem(req.app.get("db"), id, itemToUpdate)
+      .then((rowsAffected) => {
+        console.log({ ...itemToUpdate });
+        res.status(204).json({ ...itemToUpdate, id: req.params.id });
       })
       .catch(next);
   });

@@ -14,11 +14,14 @@ const ItemsService = {
         return rows[0];
       });
   },
-  getItemsById(knex, id) {
-    return knex.from("items").select("*").where("id", id).first();
+  getItemById(knex, item_id) {
+    return knex.from("items").select("*").where("id", item_id).first();
   },
   deleteItem(knex, item_id) {
     return knex("items").where("id", item_id).delete();
+  },
+  updateItem(knex, item_id, newItemFields) {
+    return knex("items").where("id", item_id).update(newItemFields);
   },
 };
 

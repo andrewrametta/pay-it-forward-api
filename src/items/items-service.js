@@ -1,7 +1,11 @@
 const ItemsService = {
   getAllItems(knex) {
     return knex
-      .select(knex.raw("items.*, users.*"))
+      .select(
+        knex.raw(
+          "items.*, users.username, users.address, users.city, users.state, users.user_url"
+        )
+      )
       .join("users", { "users.id": "items.user_id" })
       .from("items");
   },

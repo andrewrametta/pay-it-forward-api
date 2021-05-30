@@ -9,7 +9,7 @@ const serializeItem = (item) => ({
   id: item.id,
   user_id: item.user_id,
   org_id: item.org_id,
-  status: item.status,
+  cur_status: item.cur_status,
   title: xss(item.title),
   description: xss(item.description),
   item_url: xss(item.item_url),

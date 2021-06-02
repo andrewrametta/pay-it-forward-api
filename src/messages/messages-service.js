@@ -14,12 +14,12 @@ const MessagesService = {
   getMessageById(knex, id) {
     return knex.from("messages").select("*").where("id", id).first();
   },
-  getMessagesByConversationId(knex, conversation_id) {
+  getMessagesByConversationId(knex, conversations_id) {
     return knex
       .from("messages")
       .select(knex.raw("messages.*, users.username"))
       .join("users", { "users.id": "messages.user_id" })
-      .where("conversations_id", conversation_id);
+      .where("conversations_id", conversations_id);
   },
 };
 

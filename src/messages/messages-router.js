@@ -17,19 +17,7 @@ const serializeMessage = (message) => ({
 
 messagesRouter
   .route("/")
-  .get((req, res, next) => {
-    console.log(req.body);
-    const conversations_id = req.body.conversations_id;
-    MessagesService.getMessagesByConversationId(
-      req.app.get("db"),
-      conversations_id
-    )
 
-      .then((messages) => {
-        res.json(messages.map(serializeMessage));
-      })
-      .catch(next);
-  })
   .post(requireAuth, (req, res, next) => {
     const { conversations_id, text, message_status } = req.body;
     const newMessage = {

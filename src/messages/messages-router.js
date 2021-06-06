@@ -15,35 +15,28 @@ const serializeMessage = (message) => ({
   username: message.username,
 });
 
-messagesRouter
-  .route("/")
+messagesRouter.route("/").post(requireAuth, (req, res, next) => {
+  const { conversations_id, text, message_status } = req.body;
+  const newMessage = {
+    conversations_id,
+    text,
+    message_status,
+  };
 
-  .post(requireAuth, (req, res, next) => {
-    const { conversations_id, text, message_status } = req.body;
-    const newMessage = {
-      conversations_id,
-      text,
-      message_status,
-    };
-
-    for (const [key, value] of Object.entries(newMessage))
-      if (value == null)
-        return res.status(400).json({
-          error: { message: `'${key}' is required` },
-        });
-    newMessage.user_id = req.user.id;
-    MessagesService.insertMessage(req.app.get("db"), newMessage)
-      .then((message) => {
-        res
-          .status(201)
-          //.location(`/messages/${message.id}`)
-          .json(serializeMessage(message));
-      })
-      .catch(next);
-  });
+  for (const [key, value] of Object.entries(newMessage))
+    if (value == null)
+      return res.status(400).json({
+        error: { message: `'${key}' is required` },
+      });
+  newMessage.user_id = req.user.id;
+  MessagesService.insertMessage(req.app.get("db"), newMessage)
+    .then((message) => {
+      res.status(201).json(serializeMessage(message));
+    })
+    .catch(next);
+});
 
 messagesRouter.route("/:conversations_id").get((req, res, next) => {
-  console.log(req.body);
   const conversations_id = req.params.conversations_id;
   MessagesService.getMessagesByConversationId(
     req.app.get("db"),

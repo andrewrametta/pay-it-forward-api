@@ -64,8 +64,6 @@ itemsRouter
     res.json(serializeItem(res.item));
   })
   .delete((req, res, next) => {
-    console.log(req.params);
-    console.log(req.params.item_id);
     ItemsService.deleteItem(req.app.get("db"), req.params.item_id)
       .then(() => {
         res.status(204).end();
@@ -86,7 +84,6 @@ itemsRouter
     const id = req.params.item_id;
     ItemsService.updateItem(req.app.get("db"), id, itemToUpdate)
       .then((rowsAffected) => {
-        console.log({ ...itemToUpdate });
         res.status(204).json({ ...itemToUpdate, id: req.params.id });
       })
       .catch(next);

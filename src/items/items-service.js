@@ -19,7 +19,16 @@ const ItemsService = {
       });
   },
   getItemById(knex, item_id) {
-    return knex.from("items").select("*").where("id", item_id).first();
+    return knex
+      .select(
+        knex.raw(
+          "items.*, users.username, users.address, users.city, users.state, users.user_url"
+        )
+      )
+      .join("users", { "users.id": "items.user_id" })
+      .from("items")
+      .where("items.id", item_id)
+      .first();
   },
   deleteItem(knex, item_id) {
     return knex("items").where("id", item_id).delete();

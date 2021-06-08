@@ -11,6 +11,8 @@ const serializeConversation = (conversation) => ({
   user2_id: conversation.user2_id,
   username: conversation.username,
   username2: conversation.username2,
+  user_url: conversation.user_url,
+  user2_url: conversation.user2_url,
 });
 
 conversationsRouter

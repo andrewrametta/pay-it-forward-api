@@ -16,7 +16,7 @@ const ConversationsService = {
       .from("conversations")
       .select(
         knex.raw(
-          "conversations.*, users.username, users2.username as username2"
+          "conversations.*, users.username, users2.username as username2, users.user_url, users2.user_url as user2_url"
         )
       )
       .join("users", { "users.id": "conversations.user_id" })

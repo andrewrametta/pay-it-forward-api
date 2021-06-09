@@ -17,7 +17,7 @@ const MessagesService = {
   getMessagesByConversationId(knex, conversations_id) {
     return knex
       .from("messages")
-      .select(knex.raw("messages.*, users.username"))
+      .select(knex.raw("messages.*, users.username, users.user_url"))
       .join("users", { "users.id": "messages.user_id" })
       .where("conversations_id", conversations_id);
   },

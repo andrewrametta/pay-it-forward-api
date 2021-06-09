@@ -13,6 +13,7 @@ const serializeMessage = (message) => ({
   timestamp: xss(message.timestamp),
   message_status: message.message_status,
   username: message.username,
+  user_url: message.user_url,
 });
 
 messagesRouter.route("/").post(requireAuth, (req, res, next) => {

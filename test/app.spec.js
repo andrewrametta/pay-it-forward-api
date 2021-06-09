@@ -189,6 +189,8 @@ describe("Pay it forward", () => {
             user2_id: 3,
             username: "testAuth",
             username2: "testuser2",
+            user_url: "testimage.com",
+            user2_url: "testimage.com",
           },
         ];
         return supertest(app)
@@ -249,6 +251,7 @@ describe("Pay it forward", () => {
             timestamp:
               "Tue Mar 16 2021 00:00:00 GMT-0400 (Eastern Daylight Time)",
             username: "testAuth",
+            user_url: "testimage.com",
           },
           {
             id: 2,
@@ -259,6 +262,7 @@ describe("Pay it forward", () => {
             timestamp:
               "Tue Mar 16 2021 00:00:00 GMT-0400 (Eastern Daylight Time)",
             username: "testuser2",
+            user_url: "testimage.com",
           },
         ];
         return supertest(app)

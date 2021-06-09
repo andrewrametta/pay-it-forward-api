@@ -38,6 +38,7 @@ authRouter
             user_type: dbUser.user_type,
             user_status: dbUser.user_status,
             username: dbUser.username,
+            user_url: dbUser.user_url,
           };
           res.send({
             authToken: AuthService.createJwt(subject, payload),

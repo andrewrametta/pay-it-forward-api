@@ -1,30 +1,80 @@
-# Express Boilerplate!
+# PayItForward - API
 
-This is a boilerplate project used for starting new projects!
+A network of generosity
 
-## Set up
+Live version: (https://pay-it-forward-andrewrametta.vercel.app/)
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+## Introduction 
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+If you have something to donate but don't know who to give it to. If you are a nonprofit looking for local donations. 
 
-## Scripts
+PayItForward is network of donors and nonprofits. We connect the donors item to the nonprofit that requests it. We provide image uploading and a messaging service that keeps everything simple and efficient.
 
-Start the application `npm start`
+## Technologies
 
-Start nodemon for the application `npm run dev`
+* Node and Express 
+  * Authentication via JWT 
+  * RESTful API 
+* Testing 
+  * Supertest (integration) 
+  * Mocha and Chai (unit)
+* Database 
+  * Postgres
+  * Knex.js 
+  
+## Production 
 
-Run the tests `npm test`
+Deployed via Heroku
 
-## Deploying
+## API Endpoints
 
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's main branch.
+### Users Router
+```
+- /api/users 
+- - GET - gets user that matches 
+- - POST - creates a new user
+```
 
-## Readme
+### Items Router
+```
+- /api/items
+- - GET - gets all items
+- - POST - creates a new item
 
-Once you deploy this project, please feel free to update this README file
+- /api/items/:item_id
+- - GET - get item with item_id
+- - DELETE - deletes an item with item_id
+- - PATCH - edits an item with item_id
+```
+
+
+### Auth Router
+```
+- /api/auth/login
+- - POST - creates auth token
+```
+
+### Upload Router
+```
+- /api/uploads
+- - POST - creates a new upload image
+```
+
+
+### Conversations Router
+```
+- /api/conversations
+- - GET - gets all conversations
+- - POST - creates a new conversation
+```
+
+### Messages Router
+```
+- /api/messages
+- - GET - gets all conversations
+- - POST - creates a new message
+
+- /api/messages/:conversation_id
+- - GET - gets all messages with conversation_id
+```
+

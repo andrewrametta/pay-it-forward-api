@@ -1,5 +1,4 @@
 const knex = require("knex");
-const socket = require("socket.io");
 const app = require("./app");
 
 const { PORT, DATABASE_URL } = require("./config");
